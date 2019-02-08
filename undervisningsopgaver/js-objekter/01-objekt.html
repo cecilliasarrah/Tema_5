@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <div id="liste">
+        <h3></h3>
+        <img src="" alt="">
+    </div>
+
+    <script>
+        //        function start() {
+        //            console.log(start);
+
+        let alleDyr = [{
+                "navn": "Gris",
+                "type": "Pattedyr",
+                "levested": "Svinefarm",
+                "billede": "http://helf-kea.dk/test/gris.png"
+            },
+            {
+                "navn": "Frø",
+                "type": "Pattedyr",
+                "levested": "Sø",
+                "billede": "http://helf-kea.dk/test/frø.png"
+            },
+            {
+                "navn": "Ræv",
+                "type": "Pattedyr",
+                "levested": "Skov",
+                "billede": "http://helf-kea.dk/test/fox.png"
+            },
+            {
+                "navn": "Sild",
+                "type": "Fisk",
+                "levested": "Vandet",
+                "billede": "http://helf-kea.dk/test/sild.jpg"
+            },
+            {
+                "navn": "Krokodille",
+                "type": "Pattedyr",
+                "levested": "Vandet",
+                "billede": "http://helf-kea.dk/test/kroko.jpg"
+            },
+
+        ];
+
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let dest = document.querySelector("#liste");
+            alleDyr.forEach(alleDyr => {
+                        dest.innerHTML += ``
+                        $ {
+                            dyr.navn
+                        }, $ {
+                            dyr.type
+                        }
+                        fra $ {
+                            dyr.levested
+                        } < bn >
+                            `;
+
+            })
+
+
+
+
+//            let navn = `
+                        $ {
+                            object.navn
+                        }
+                        `
+//            dest.querySelector("h3").textContent = navn;
+//            dest.querySelector("p").textContent += object.levested;
+//            dest.querySelector("img").src = object.billede;
+        }
+    </script>
+
+    <div id="object">
+        <h3></h3>
+        <p>Type: Pattedyr </p>
+        <p>Levested: Svinefarm </p>
+        <img src="" alt="">
+    </div>
+
+</body>
+
+</html>

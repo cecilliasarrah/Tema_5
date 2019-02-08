@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <script>
+        let længde = 3;
+        let bredde = 50;
+        let areal = længde * bredde;
+        let resultat;
+
+        //Godmorgen mellem kl. 5 og kl. 10
+        if (areal < 100) {
+            resultat = "Arealet er for lille";
+        }
+
+        //Goddag mellem kl. 10 og kl. 18
+        if (areal >= 100 && areal < 200) {
+            resultat = "Arealet er ok";
+        }
+
+        //godaften mellem kl. 18 og kl. 24
+        if (areal > 200) {
+            resultat = "Arealet er for stort";
+        }
+
+        //godnat mellem kl. 24 og kl. 5
+        if (areal > 200) {
+            resultat = "Arealet er for stort";
+        }
+
+        console.log(resultat);
+    </script>
+
+</body>
+
+</html>

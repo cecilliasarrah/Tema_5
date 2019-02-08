@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <div id="liste">
+    </div>
+
+    <script>
+        let dyr = [];
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let dest = document.querySelector("#liste");
+
+            async function getJeson() {
+                let jsonData = await fetch("dyr.json");
+                dyr = await jsonData.json();
+                visDyr();
+            }
+
+            function visDyr() {
+                alert("hi")
+                dyr.forEach(dyr => {
+                    dest.innerHTML += `
+                <div class="dyr">
+                <h3>${dyr.navn} ${dyr.type}</h3>
+                <p>Levested: ${dyr.levested}</p>
+                <p>Billede: ${dyr.billede}</p>
+                }
+                </div>
+
+                `;
+                })
+            }
+
+
+            getJeson()
+        }
+    </script>
+</body>
+
+</html>
