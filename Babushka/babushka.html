@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+
+    <ul>
+        <li><a href="">Hjem</a></li>
+        <li><a href="">Menu</a></li>
+        <li><a href="">Kvaliteter</a></li>
+        <li><a href="">Om os</a></li>
+        <li><a href="">Kontakt</a></li>
+        <li style="float:right"><a class="active" href="">Book bord</a></li>
+    </ul>
+
+
+</head>
+
+<style>
+    /*_______________________ Menu _______________________*/
+
+    /*
+    html,
+    body,
+    * {
+        margin: 0;
+        padding: 0;
+    }
+*/
+
+    h1 {
+        font-family: helvetica, sans-serif;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        font-family: helvetica, sans-serif;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover {
+        background-color: #111;
+    }
+
+    .mySlides {
+        display: none;
+
+    }
+
+
+
+
+
+    /*    _________________*/
+
+    .valgt {
+        /*        background-color: red;*/
+    }
+
+    #liste {
+        background-color: whitesmoke;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+
+    }
+
+
+    img {
+        width: 50%;
+    }
+
+
+    nav {
+        text-align: center;
+        margin: 2vw;
+    }
+
+    #popup {
+        background-color: black;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+
+        display: none;
+
+    }
+
+
+    #luk {
+        box-sizing: border-box;
+        text-align: right;
+        padding-right: 1em;
+    }
+
+    #luk button {
+        font-size: 2em;
+    }
+
+
+    #indhold {
+        box-sizing: border-box;
+        background-color: lightgray;
+        width: 90vw;
+        height: 90vh;
+        margin: auto;
+    }
+
+
+
+
+
+    .overskrift {
+        font-family: helvetica, sans-serif;
+        font-size: 1.5em;
+        font-weight: 100;
+        margin: 3vw;
+    }
+
+    p {
+        font-family: helvetica, sans-serif;
+        font-weight: 100;
+
+        /*        margin: 14vw;*/
+    }
+
+    .ul {
+        font-family: helvetica, sans-serif;
+    }
+
+
+
+
+
+    .center_billede {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: inherit;
+        width: 65vw;
+    }
+
+
+    /
+</style>
+
+<body>
+    <div id="popup">
+
+        <div id="luk"><button>X</button></div>
+        <div id="indhold"></div>
+
+
+    </div>
+
+    <!--    --------------------------->
+    <div class="overskrift">
+        <center>Menu</center>
+    </div>
+
+
+
+    <center>
+        <div class="w3-content w3-section" style="max-width:500px">
+            <img class="mySlides" src="imgs/small/boef-sm.jpg" style="width:100%">
+            <img class="mySlides" src="imgs/small/ringbroed-druer-sm.jpg" style="width:100%">
+            <img class="mySlides" src="imgs/small/groggiroshorn-sm.jpg" style="width:100%">
+        </div>
+    </center>
+
+
+    <center>
+        <p>Velkommen til BISTRO BABUSHKA</p>
+    </center>
+
+    <header>
+        <nav>
+
+            <h1></h1>
+
+            <button class="filter" data-kategori="forretter">Forretter</button>
+            <button class="filter" data-kategori="hovedretter">Hovedretter</button>
+            <button class="filter" data-kategori="desserter">Desserter</button>
+            <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
+
+        </nav>
+
+    </header>
+
+
+
+
+
+
+    <section id="liste">
+        <article class="person"></article>
+
+    </section>
+
+
+
+
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) {
+                myIndex = 1
+            }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 2000); // Change image every 2 seconds
+        }
+
+
+        //       <!--    --------------------------->
+
+        let alleRetter = [];
+        let filter = "hovedretter";
+
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let dest = document.querySelector("#liste");
+            async function getJson() {
+                let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
+                alleRetter = await jsonData.json();
+
+
+                visMad();
+            }
+
+            function visMad() {
+                dest.innerHTML = "";
+                alleRetter.forEach(mad => {
+                    if (filter == mad.kategori) {
+
+                        let template = `
+                            <article class="mad">
+                                <h2>${mad.navn}</h2>
+                                <img src="imgs/small/${mad.billede}-sm.jpg">
+                                <p></p>
+                                <p>Pris ${mad.pris}</p>
+                                <p>Oprindelse: ${mad.oprindelse} </p>
+                        </article>
+                    `;
+                        dest.insertAdjacentHTML("beforeend", template);
+                        dest.lastElementChild.addEventListener("click", aabn);
+
+                        function aabn() {
+                            document.querySelector("#indhold").innerHTML = `
+                                <article class="mad">
+                                <h2>${mad.navn}</h2>
+                                <img class="billede" src="imgs/large/${mad.billede}.jpg" alt="${mad.navn}">
+                                <h3>pris: ${mad.pris}</ph3>
+                                <h4>Oprindelse: ${mad.oprindelse}</h4>
+                                <p>Beskrivelse:${mad.lang}</p>
+                            </article>
+                        `;
+
+                            document.querySelector("#popup").style.display = "block";
+
+                        }
+
+                    }
+                })
+
+            }
+
+
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtrering);
+            })
+
+            function filtrering() {
+                filter = this.getAttribute("data-kategori");
+                document.querySelector("h1").textContent = this.textContent;
+
+                visMad();
+            }
+
+            document.querySelector("#luk button").addEventListener("click", () => {
+                document.querySelector("#popup").style.display = "none";
+            })
+
+
+
+
+            getJson();
+        }
+    </script>
+
+</body>
+
+</html>
